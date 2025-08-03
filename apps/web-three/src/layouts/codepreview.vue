@@ -44,14 +44,14 @@ function codePreview() {
   position: fixed;
   right: 20px;
   bottom: 20px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  width: 42px;
+  height: 42px;
   cursor: pointer;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
 }
 </style>

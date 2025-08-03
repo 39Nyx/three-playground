@@ -17,6 +17,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           title: $t('page.basic.simple.title'),
           icon: 'carbon:workspace',
+          codeUrl: 'basic/simple/simple.vue',
         },
         name: 'BasicSimple',
         path: 'simple',

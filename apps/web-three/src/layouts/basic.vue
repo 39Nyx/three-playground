@@ -21,6 +21,8 @@ import { $t } from '#/locales';
 import { useAuthStore } from '#/store';
 import LoginForm from '#/views/_core/authentication/login.vue';
 
+import CodePreview from './codepreview.vue';
+
 const notifications = ref<NotificationItem[]>([
   {
     avatar: 'https://avatar.vercel.sh/vercel.svg?text=VB',
@@ -150,6 +152,7 @@ watch(
       >
         <LoginForm />
       </AuthenticationLoginExpiredModal>
+      <CodePreview />
     </template>
     <template #lock-screen>
       <LockScreen :avatar @to-login="handleLogout" />

@@ -13,6 +13,8 @@ const isShow = computed(() => {
   return route.meta.codeUrl && codeFiles[codeUrl];
 });
 
+window.console.log(codeFiles, isShow.value);
+
 function codePreview() {
   if (codeFiles[codeUrl]) {
     codeFiles[codeUrl]().then((res: any) => {
@@ -23,7 +25,7 @@ function codePreview() {
 </script>
 
 <template>
-  <div v-if="isShow" class="code-preview" @click="codePreview">
+  <div class="code-preview" @click="codePreview">
     <NIcon size="28">
       <svg
         xmlns="http://www.w3.org/2000/svg"

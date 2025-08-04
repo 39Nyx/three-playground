@@ -42,6 +42,7 @@
     "@vben/utils": "workspace:*",
     "@vicons/ionicons5": "^0.13.0",
     "@vueuse/core": "catalog:",
+    "monaco-editor": "^0.52.2",
     "naive-ui": "catalog:",
     "pinia": "catalog:",
     "three": "^0.179.1",

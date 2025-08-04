@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import type { Ref } from 'vue';
+
+import { computed, nextTick, ref, useTemplateRef } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { NIcon } from 'naive-ui';
+import * as monaco from 'monaco-editor';
+import { NDrawer, NDrawerContent, NIcon } from 'naive-ui';
 
 const codeFiles = import.meta.glob('/src/views/**/*.vue', { as: 'raw' });
 const route = useRoute();
+
+const show: Ref<boolean> = ref(false);
+const containerRef: Ref<HTMLDivElement | null> = useTemplateRef('container');
+let editorInstance: any = null;
 
 const codeUrl = `/src/views/${route.meta.codeUrl}`;
 
@@ -13,19 +20,37 @@ const isShow = computed(() => {
   return route.meta.codeUrl && codeFiles[codeUrl];
 });
 
-window.console.log(codeFiles, isShow.value);
-
-function codePreview() {
-  if (codeFiles[codeUrl]) {
-    codeFiles[codeUrl]().then((res: any) => {
-      window.console.log(res);
+function initEditor() {
+  if (containerRef.value) {
+    editorInstance = monaco.editor.create(containerRef.value, {
+      language: 'html',
+      value: '',
     });
   }
+}
+
+function codePreview() {
+  show.value = true;
+}
+
+function onAfterEnter() {
+  if (codeFiles[codeUrl]) {
+    codeFiles[codeUrl]().then((res: any) => {
+      nextTick(() => {
+        initEditor();
+        editorInstance.setValue(res);
+      });
+    });
+  }
+}
+
+function onAfterLeave() {
+  editorInstance.dispose();
 }
 </script>
 
 <template>
-  <div class="code-preview" @click="codePreview">
+  <div v-if="isShow" class="code-preview" @click="codePreview">
     <NIcon size="28">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -38,6 +63,16 @@ function codePreview() {
         />
       </svg>
     </NIcon>
+    <NDrawer
+      v-model:show="show"
+      :on-after-enter="onAfterEnter"
+      :on-after-leave="onAfterLeave"
+      width="50%"
+    >
+      <NDrawerContent title="代码实现" closable>
+        <div ref="container" class="code-editor"></div>
+      </NDrawerContent>
+    </NDrawer>
   </div>
 </template>
 
@@ -55,5 +90,10 @@ function codePreview() {
   background-color: #fff;
   border-radius: 50%;
   box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.code-editor {
+  width: 100%;
+  height: 100%;
 }
 </style>

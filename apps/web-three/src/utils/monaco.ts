@@ -1,11 +1,11 @@
 import * as monaco from 'monaco-editor';
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker.js?worker';
+import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker.js?worker';
 
-import { registerHighlighter } from './highlight.ts';
+import { registerHighlighter } from './highlight';
 
 (self as any).MonacoEnvironment = {
-  async getWorker(_: any, label: string) {
-    return new editorWorker();
+  async getWorker(_: any) {
+    return new EditorWorker();
   },
 };
 

@@ -1,33 +1,25 @@
 <script setup lang="ts">
 import type { Ref } from 'vue';
 
-import { computed, nextTick, ref, useTemplateRef } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import * as monaco from 'monaco-editor';
 import { NDrawer, NDrawerContent, NIcon } from 'naive-ui';
+
+import MonacoVue from '../components/monaco-vue.vue';
 
 const codeFiles = import.meta.glob('/src/views/**/*.vue', { as: 'raw' });
 const route = useRoute();
 
 const show: Ref<boolean> = ref(false);
-const containerRef: Ref<HTMLDivElement | null> = useTemplateRef('container');
-let editorInstance: any = null;
 
 const codeUrl = `/src/views/${route.meta.codeUrl}`;
+
+const code = ref('');
 
 const isShow = computed(() => {
   return route.meta.codeUrl && codeFiles[codeUrl];
 });
-
-function initEditor() {
-  if (containerRef.value) {
-    editorInstance = monaco.editor.create(containerRef.value, {
-      language: 'html',
-      value: '',
-    });
-  }
-}
 
 function codePreview() {
   show.value = true;
@@ -36,16 +28,9 @@ function codePreview() {
 function onAfterEnter() {
   if (codeFiles[codeUrl]) {
     codeFiles[codeUrl]().then((res: any) => {
-      nextTick(() => {
-        initEditor();
-        editorInstance.setValue(res);
-      });
+      code.value = res;
     });
   }
-}
-
-function onAfterLeave() {
-  editorInstance.dispose();
 }
 </script>
 
@@ -63,14 +48,9 @@ function onAfterLeave() {
         />
       </svg>
     </NIcon>
-    <NDrawer
-      v-model:show="show"
-      :on-after-enter="onAfterEnter"
-      :on-after-leave="onAfterLeave"
-      width="50%"
-    >
+    <NDrawer v-model:show="show" :on-after-enter="onAfterEnter" width="50%">
       <NDrawerContent title="代码实现" closable>
-        <div ref="container" class="code-editor"></div>
+        <MonacoVue v-model:value="code" />
       </NDrawerContent>
     </NDrawer>
   </div>
@@ -90,10 +70,5 @@ function onAfterLeave() {
   background-color: #fff;
   border-radius: 50%;
   box-shadow: 0 0 4px rgb(0 0 0 / 15%);
-}
-
-.code-editor {
-  width: 100%;
-  height: 100%;
 }
 </style>

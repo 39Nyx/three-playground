@@ -26,6 +26,7 @@
     "#/*": "./src/*"
   },
   "dependencies": {
+    "@shikijs/monaco": "^3.9.2",
     "@vben/access": "workspace:*",
     "@vben/common-ui": "workspace:*",
     "@vben/constants": "workspace:*",
@@ -45,6 +46,7 @@
     "monaco-editor": "^0.52.2",
     "naive-ui": "catalog:",
     "pinia": "catalog:",
+    "shiki": "^3.9.2",
     "three": "^0.179.1",
     "vue": "catalog:",
     "vue-router": "catalog:"

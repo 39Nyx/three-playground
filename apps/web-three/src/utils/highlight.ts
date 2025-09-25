@@ -4,6 +4,7 @@ import { createJavaScriptRegexEngine } from 'shiki/engine-javascript.mjs';
 import langJsx from 'shiki/langs/jsx.mjs';
 import langTsx from 'shiki/langs/tsx.mjs';
 import langVue from 'shiki/langs/vue.mjs';
+import js from 'shiki/langs/javascript.mjs';
 import themeDark from 'shiki/themes/andromeeda.mjs';
 import themeLight from 'shiki/themes/catppuccin-latte.mjs';
 
@@ -13,7 +14,7 @@ export async function registerHighlighter(monaco: any) {
   if (!registered) {
     const highlighter = await createHighlighter({
       themes: [themeLight, themeDark],
-      langs: [langVue, langTsx, langJsx],
+      langs: [langVue, langTsx, langJsx, js],
       engine: createJavaScriptRegexEngine(),
     });
     monaco.languages.register({ id: 'vue' });

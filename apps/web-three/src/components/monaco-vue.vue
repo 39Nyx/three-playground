@@ -7,11 +7,18 @@ import {
   watch,
 } from 'vue';
 
-import { createMonaco } from '../utils/monaco.ts';
+import { createMonaco } from '#/utils/monaco';
 
 const containerRef = useTemplateRef('container');
 
 const editor = shallowRef<any>();
+
+const props = defineProps({
+  language: {
+    type: String,
+    default: 'vue',
+  },
+});
 
 const modelValue = defineModel('value');
 
@@ -30,7 +37,7 @@ onMounted(async () => {
 
   editorInstance = await createMonaco(containerRef.value, {
     value: modelValue.value,
-    language: 'vue',
+    language: props.language,
     automaticLayout: true,
   });
 

@@ -16,5 +16,8 @@
     "simple": {
       "title": "简单示例"
     }
+  },
+  "charts": {
+    "title": "图表"
   }
 }

@@ -163,7 +163,7 @@ catalogs:
       specifier: ^10.4.21
       version: 10.4.21
     axios:
-      specifier: ^1.10.0
+      specifier: 1.10.0
       version: 1.10.0
     axios-mock-adapter:
       specifier: ^2.1.0
@@ -888,9 +888,18 @@ importers:
       '@vben/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@vicons/ionicons5':
+        specifier: ^0.13.0
+        version: 0.13.0
       '@vueuse/core':
         specifier: 'catalog:'
         version: 13.4.0(vue@3.5.17(typescript@5.8.3))
+      axios:
+        specifier: 'catalog:'
+        version: 1.10.0
+      monaco-editor:
+        specifier: ^0.52.2
+        version: 0.52.2
       naive-ui:
         specifier: 'catalog:'
         version: 2.42.0(vue@3.5.17(typescript@5.8.3))
@@ -909,6 +918,9 @@ importers:
       vue-router:
         specifier: 'catalog:'
         version: 4.5.1(vue@3.5.17(typescript@5.8.3))
+      vue3-lazy:
+        specifier: 1.0.0-alpha.1
+        version: 1.0.0-alpha.1(vue@3.5.17(typescript@5.8.3))
     devDependencies:
       '@types/three':
         specifier: ^0.178.1
@@ -5238,6 +5250,9 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  '@vicons/ionicons5@0.13.0':
+    resolution: {integrity: sha512-zvZKBPjEXKN7AXNo2Na2uy+nvuv6SP4KAMQxpKL2vfHMj0fSvuw7JZcOPCjQC3e7ayssKnaoFVAhbYcW6v41qQ==}
+
   '@vite-pwa/vitepress@1.0.0':
     resolution: {integrity: sha512-i5RFah4urA6tZycYlGyBslVx8cVzbZBcARJLDg5rWMfAkRmyLtpRU6usGfVOwyN9kjJ2Bkm+gBHXF1hhr7HptQ==}
     peerDependencies:
@@ -8862,6 +8877,9 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  monaco-editor@0.52.2:
+    resolution: {integrity: sha512-GEQWEZmfkOGLdd3XK8ryrfWz3AIP8YymVXiPHEdewrUq7mh0qrKrfHLNCXcbB6sTnMLnOZ3ztSiKcciFUkIJwQ==}
+
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -11566,6 +11584,12 @@ packages:
   vue-types@3.0.2:
     resolution: {integrity: sha512-IwUC0Aq2zwaXqy74h4WCvFCUtoV0iSWr0snWnE9TnU18S66GAQyqQbRf2qfJtUuiFsBf6qp0MEwdonlwznlcrw==}
     engines: {node: '>=10.15.0'}
+    peerDependencies:
+      vue: ^3.5.17
+
+  vue3-lazy@1.0.0-alpha.1:
+    resolution: {integrity: sha512-dpjpKK4DC5q+wZVtS/VY3X6pYBJHxRmYanr20s39RB6o6fvbneQ/DNuz37bipYfEdrEvbSZ95Y2SCexuznQNrQ==}
+    engines: {node: '>=6.0.0'}
     peerDependencies:
       vue: ^3.5.17
 
@@ -15529,6 +15553,8 @@ snapshots:
       - encoding
       - rollup
       - supports-color
+
+  '@vicons/ionicons5@0.13.0': {}
 
   '@vite-pwa/vitepress@1.0.0(vite-plugin-pwa@1.0.1(vite@5.4.18(@types/node@22.16.0)(less@4.3.0)(sass@1.89.2)(terser@5.39.0))(workbox-build@7.3.0)(workbox-window@7.3.0))':
     dependencies:
@@ -19544,6 +19570,8 @@ snapshots:
       ast-module-types: 6.0.1
       node-source-walk: 7.0.1
 
+  monaco-editor@0.52.2: {}
+
   mri@1.2.0: {}
 
   mrmime@2.0.1: {}
@@ -22629,6 +22657,10 @@ snapshots:
   vue-types@3.0.2(vue@3.5.17(typescript@5.8.3)):
     dependencies:
       is-plain-object: 3.0.1
+      vue: 3.5.17(typescript@5.8.3)
+
+  vue3-lazy@1.0.0-alpha.1(vue@3.5.17(typescript@5.8.3)):
+    dependencies:
       vue: 3.5.17(typescript@5.8.3)
 
   vue@3.5.17(typescript@5.8.3):

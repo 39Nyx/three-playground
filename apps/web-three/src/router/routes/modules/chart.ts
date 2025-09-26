@@ -27,6 +27,22 @@ const routes: RouteRecordRaw[] = [
       };
     },
   },
+  {
+    name: 'ChartsEditor',
+    path: '/charts/editor',
+    component: () => import('#/views/charts/editor/editor.vue'),
+    meta: {
+      icon: 'carbon:workspace',
+      title: $t('page.charts.title'),
+      keepAlive: true,
+      hideInMenu: true,
+    },
+    props: (route) => {
+      return {
+        cid: route.query.cid,
+      };
+    },
+  },
 ];
 
 export default routes;

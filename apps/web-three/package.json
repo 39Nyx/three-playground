@@ -43,6 +43,7 @@
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vicons/ionicons5": "^0.13.0",
+    "@vue/repl": "^4.7.0",
     "@vueuse/core": "catalog:",
     "axios": "catalog:",
     "monaco-editor": "^0.52.2",

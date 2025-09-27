@@ -53,7 +53,7 @@ function imgUrl(name: string) {
 
 function selectCharts(chart: any) {
   router.push({
-    name: 'ChartsPreview',
+    name: 'ChartsEditor',
     query: {
       cid: chart.cid,
     },

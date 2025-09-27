@@ -2,9 +2,21 @@
 import { Repl, useStore, type SFCOptions, useVueImportMap } from '@vue/repl';
 import Monaco from '@vue/repl/monaco-editor';
 import { ref, watchEffect, onMounted, computed } from 'vue';
+import { getChartOptions } from '#/api/charts/page';
+import echartsTemplate from './echartsTemplate.vue?raw';
 
 const replRef = ref<InstanceType<typeof Repl>>();
+const defaultHash =
+  '#eNp9kL1uwzAMhF9F4Bw4QzsFRoC2yNAObdF21GLIrKNElgSRcgwEfvdIMvIzBNnIu4/SkUd48b4aIsIKalJBexaEHP1a2no5C6lMDWPvTcOYOiHqVg/rLRrjxMEF09bLLOSRGwwWwKSc/dddtSNn0xfHPCxBud5rg+HLs3aWJKxEcbLXpEcPH0XjEHFx1tUW1f6OvqMxaxK+AxKGASVcPG5Chzzbm99PHFN9MXvXRpPoB+YPkjMxZ5yx12jbFPuGK2nfe+8Ca9v90WZktHReKgfN5FR4CenObw9Wv8Z9qp7LnLQTTCfL/orT';
 
+const props = withDefaults(
+  defineProps<{
+    cid: string;
+  }>(),
+  {
+    cid: '',
+  },
+);
 const setVH = () => {
   document.documentElement.style.setProperty('--vh', window.innerHeight + `px`);
 };
@@ -18,8 +30,6 @@ const initAutoSave: boolean = JSON.parse(
   localStorage.getItem(AUTO_SAVE_STORAGE_KEY) ?? 'true',
 );
 const autoSave = ref(initAutoSave);
-
-console.log(autoSave.value);
 
 const { productionMode, vueVersion, importMap } = useVueImportMap({
   runtimeDev: import.meta.env.PROD
@@ -74,15 +84,13 @@ const sfcOptions = computed(
   }),
 );
 
-console.log(sfcOptions.value);
-
 const store = useStore(
   {
     builtinImportMap: importMap,
     vueVersion,
     sfcOptions,
   },
-  hash,
+  hash || defaultHash,
 );
 // @ts-expect-error
 globalThis.store = store;
@@ -93,7 +101,7 @@ watchEffect(() => {
     .serialize()
     .replace(/^#/, useSSRMode.value ? `#__SSR__` : `#`)
     .replace(/^#/, productionMode.value ? `#__PROD__` : `#`);
-  history.replaceState({}, '', newHash);
+  // history.replaceState({}, '', newHash);
 });
 
 const theme = ref<'dark' | 'light'>('dark');
@@ -108,6 +116,15 @@ onMounted(() => {
 
   // @ts-expect-error process shim for old versions of @vue/compiler-sfc dependency
   window.process = { env: {} };
+
+  getChartOptions(props.cid).then((res) => {
+    store.setFiles({
+      'App.vue': echartsTemplate.replace(
+        '// __PREVIEW__CHART_OPTIONS__',
+        res.data,
+      ),
+    });
+  });
 });
 </script>
 

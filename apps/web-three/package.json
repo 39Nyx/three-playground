@@ -46,6 +46,7 @@
     "@vue/repl": "^4.7.0",
     "@vueuse/core": "catalog:",
     "axios": "catalog:",
+    "echarts": "catalog:",
     "monaco-editor": "^0.52.2",
     "naive-ui": "catalog:",
     "pinia": "catalog:",

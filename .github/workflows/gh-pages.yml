@@ -30,17 +30,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Node
+      - name: 设置Node
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
-      - name: Set up pnpm
+      - name: 设置pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.12.4
-      - name: Install dependencies
+          version: 10.14.0
+      - name: 安装依赖
         run: pnpm install
-      - name: Build
+      - name: 打包编译
         run: pnpm run build:three:pre && node ./scripts/copyIndex.js
       - name: Setup Pages
         uses: actions/configure-pages@v4

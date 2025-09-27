@@ -34,7 +34,7 @@
     "build:naive": "pnpm run build --filter=@vben/web-naive",
     "build:play": "pnpm run build --filter=@vben/playground",
     "build:three": "pnpm run build --filter=@vben/web-three",
-    "build:three:pre": "pnpm run build:pre --filter=@vben/web-three",
+    "build:three:pre": "pnpm -F @vben/web-three run build:pre",
     "changeset": "pnpm exec changeset",
     "check": "pnpm run check:circular && pnpm run check:dep && pnpm run check:type && pnpm check:cspell",
     "check:circular": "vsh check-circular",
